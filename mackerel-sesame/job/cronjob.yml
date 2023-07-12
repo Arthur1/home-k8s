@@ -1,0 +1,34 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mackerel-sesame
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: mackerel-sesame
+              image: ghcr.io/arthur1/mackerel-sesame:sha-a6c6eff
+              env:
+                - name: MACKEREL_API_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: mackerel
+                      key: apikey
+                - name: MACKEREL_SERVICE_NAME
+                  value: home
+                - name: SESAME_API_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: sesame4
+                      key: apikey
+                - name: SESAME_DEVICE_UUID
+                  valueFrom:
+                    secretKeyRef:
+                      name: sesame4
+                      key: device_uuid
+                - name: SESAME_DEVICE_NAME_FOR_METRIC
+                  value: sesame4
+          restartPolicy: OnFailure
