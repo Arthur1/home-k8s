@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
             - name: mackerel-sesame
-              image: ghcr.io/arthur1/mackerel-sesame:sha-a6c6eff
+              image: ghcr.io/arthur1/mackerel-sesame:sha-c99545f
               env:
                 - name: MACKEREL_API_KEY
                   valueFrom:
