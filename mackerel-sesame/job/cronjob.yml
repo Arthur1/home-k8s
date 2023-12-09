@@ -15,20 +15,20 @@ spec:
                 - name: MACKEREL_API_KEY
                   valueFrom:
                     secretKeyRef:
-                      name: mackerel
+                      name: mackerel-arthur-1
                       key: apikey
                 - name: MACKEREL_SERVICE_NAME
                   value: home
                 - name: SESAME_API_KEY
                   valueFrom:
                     secretKeyRef:
-                      name: sesame4
+                      name: sesame-sesame5
                       key: apikey
                 - name: SESAME_DEVICE_UUID
                   valueFrom:
                     secretKeyRef:
-                      name: sesame4
-                      key: device_uuid
+                      name: sesame-sesame5
+                      key: device-uuid
                 - name: SESAME_DEVICE_NAME_FOR_METRIC
-                  value: sesame4
+                  value: sesame5
           restartPolicy: OnFailure
