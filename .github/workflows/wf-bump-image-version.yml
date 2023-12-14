@@ -31,12 +31,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # if zsh:
+      # sed -e "s\!\(image: $IMAGE_NAME\):.\*\!\\1:$NEW_IMAGE_TAG\!g" "$TARGET_FILE"
       - run: |
-          sed -i "s\!\(image: $IMAGE_NAME\):.\+\!\\1:$NEW_IMAGE_TAG\!g" "$TARGET_FILE"
+          sed -i "s!\(image: $IMAGE_NAME\):.\+!\\1:$NEW_IMAGE_TAG!g" "$TARGET_FILE";
         env:
-          IMAGE_NAME: ${{ github.event.inputs.image-name }}
-          NEW_IMAGE_TAG: ${{ github.event.inputs.new-image-tag }}
-          TARGET_FILE: ${{ github.event.inputs.target-file }}
+          IMAGE_NAME: "${{ github.event.inputs.image-name }}"
+          NEW_IMAGE_TAG: "${{ github.event.inputs.new-image-tag }}"
+          TARGET_FILE: "${{ github.event.inputs.target-file }}"
       - uses: peter-evans/create-pull-request@v5
         with:
           commit-message: Bump to ${{ github.event.inputs.image-name }}:${{ github.event.inputs.new-image-tag }}
