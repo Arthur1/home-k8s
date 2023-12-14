@@ -32,13 +32,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # if zsh:
-      # sed -e "s\!\(image: $IMAGE_NAME\):.\*\!\\1:$NEW_IMAGE_TAG\!g" "$TARGET_FILE"
+      # sed -i "s\!\(image: $IMAGE_NAME\):.\*\!\\1:$NEW_IMAGE_TAG\!g" "$TARGET_FILE"
       - run: |
           sed -i "s!\(image: $IMAGE_NAME\):.\+!\\1:$NEW_IMAGE_TAG!g" "$TARGET_FILE";
         env:
           IMAGE_NAME: "${{ github.event.inputs.image-name }}"
           NEW_IMAGE_TAG: "${{ github.event.inputs.new-image-tag }}"
           TARGET_FILE: "${{ github.event.inputs.target-file }}"
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: 364898
+          private-key: ${{ secrets.ARTHUR1_BOT_PRIVATE_KEY }}
       - uses: peter-evans/create-pull-request@v5
         with:
           commit-message: Bump to ${{ github.event.inputs.image-name }}:${{ github.event.inputs.new-image-tag }}
@@ -47,3 +52,4 @@ jobs:
             Automated changes by [create-pull-request](https://github.com/peter-evans/create-pull-request) GitHub action
 
             Updated file: ${{ github.event.inputs.target-file }}
+          token: ${{ steps.app-token.outputs.token }}
