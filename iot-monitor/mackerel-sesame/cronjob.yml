@@ -23,7 +23,7 @@ spec:
                 - name: SESAME_API_KEY
                   valueFrom:
                     secretKeyRef:
-                      name: sesame-sesame5
+                      name: sesame-api
                       key: apikey
                 - name: SESAME_DEVICE_UUID
                   valueFrom:
