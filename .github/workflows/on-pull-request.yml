@@ -1,0 +1,6 @@
+on:
+  pull_request:
+
+jobs:
+  test-k8s:
+    uses: ./.github/workflows/wf-test-k8s.yml

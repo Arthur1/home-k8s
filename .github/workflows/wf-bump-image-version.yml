@@ -1,0 +1,47 @@
+on:
+  workflow_call:
+    inputs:
+      image-name:
+        description: full-name of container repository
+        required: true
+        type: string
+      new-image-tag:
+        description: new image tag
+        required: true
+        type: string
+      target-file:
+        description: target manifest file to update
+        required: true
+        type: string
+
+  workflow_dispatch:
+    inputs:
+      image-name:
+        required: true
+        type: string
+      new-image-tag:
+        required: true
+        type: string
+      target-file:
+        required: true
+        type: string
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sed -i "s\!\(image: $IMAGE_NAME\):.\+\!\\1:$NEW_IMAGE_TAG\!g" "$TARGET_FILE"
+        env:
+          IMAGE_NAME: ${{ github.event.inputs.image-name }}
+          NEW_IMAGE_TAG: ${{ github.event.inputs.new-image-tag }}
+          TARGET_FILE: ${{ github.event.inputs.target-file }}
+      - uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: Bump to ${{ github.event.inputs.image-name }}:${{ github.event.inputs.new-image-tag }}
+          title: Bump to ${{ github.event.inputs.image-name }}:${{ github.event.inputs.new-image-tag }}
+          body: |
+            Automated changes by [create-pull-request](https://github.com/peter-evans/create-pull-request) GitHub action
+
+            Updated file: ${{ github.event.inputs.target-file }}
