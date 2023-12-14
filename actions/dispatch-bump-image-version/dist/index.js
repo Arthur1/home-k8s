@@ -30846,7 +30846,7 @@ const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit(githubTo
 octokit.rest.repos.createDispatchEvent({
     owner: "Arthur1",
     repo: "home-k8s",
-    event_type: "dump-image-version",
+    event_type: "bump-image-version",
     client_payload: {
         "image-name": imageName,
         "new-image-tag": newImageTag,
