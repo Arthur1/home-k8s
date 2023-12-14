@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mackerel-remo
+  namespace: iot-monitor
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: mackerel-remo
+              image: ghcr.io/arthur1/mackerel-remo:sha-b15c312
+              env:
+                - name: MACKEREL_API_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: mackerel-arthur-1
+                      key: apikey
+                - name: MACKEREL_SERVICE_NAME
+                  value: home
+                - name: NATURE_ACCESS_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: nature-api
+                      key: access-token
+                - name: REMO_DEVICE_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: nature-remo-mini
+                      key: device-id
+                - name: REMO_DEVICE_NAME_FOR_EXPORT
+                  value: remoMini-living
+          restartPolicy: OnFailure
