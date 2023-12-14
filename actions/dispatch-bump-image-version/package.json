@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "ncc build index.ts --license licenses.txt --minify"
+    "build": "ncc build index.ts --license licenses.txt"
   },
   "author": "ASAKURA Kazuki",
   "license": "UNLICENSED",
