@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: mackerel-sesame
+  namespace: iot-monitor
 spec:
   schedule: "*/5 * * * *"
   jobTemplate:
