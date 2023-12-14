@@ -1,0 +1,13 @@
+on:
+  repository_dispatch:
+    types:
+      - dump-image-version
+
+jobs:
+  bump:
+    uses: ./.github/workflows/wf-bump-image-version.yml
+    with:
+      image-name: ${{ github.event.client_payload.image-name }}
+      new-image-tag: ${{ github.event.client_payload.new-image-tag }}
+      target-file: ${{ github.event.client_payload.target-file }}
+    secrets: inherit

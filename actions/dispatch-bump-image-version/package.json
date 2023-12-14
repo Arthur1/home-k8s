@@ -1,0 +1,19 @@
+{
+  "name": "@arthur1/home-k8s-actions-dispatch-bump-image-version",
+  "version": "0.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "ncc build index.ts --license licenses.txt --minify"
+  },
+  "author": "ASAKURA Kazuki",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.1",
+    "typescript": "^5.3.3"
+  }
+}

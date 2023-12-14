@@ -1,0 +1,19 @@
+name: dispatch bump image version
+description: dispatch bump image version
+inputs:
+  token:
+    description: GitHub token
+    default: ${{ github.token }}
+  image-name:
+    description: full-name of container repository
+    required: true
+  new-image-tag:
+    description: new image tag
+    required: true
+  target-file:
+    description: target manifest file to update
+    required: true
+
+runs:
+  using: 'node20'
+  main: 'index.js'

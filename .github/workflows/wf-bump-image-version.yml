@@ -17,12 +17,15 @@ on:
   workflow_dispatch:
     inputs:
       image-name:
+        description: full-name of container repository
         required: true
         type: string
       new-image-tag:
+        description: new image tag
         required: true
         type: string
       target-file:
+        description: target manifest file to update
         required: true
         type: string
 
