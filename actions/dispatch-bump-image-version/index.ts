@@ -11,7 +11,7 @@ const octokit = github.getOctokit(githubToken);
 octokit.rest.repos.createDispatchEvent({
   owner: "Arthur1",
   repo: "home-k8s",
-  event_type: "dump-image-version",
+  event_type: "bump-image-version",
   client_payload: {
     "image-name": imageName,
     "new-image-tag": newImageTag,
