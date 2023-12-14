@@ -14,4 +14,4 @@ jobs:
       - uses: docker://ghcr.io/yannh/kubeconform:latest
         with:
           entrypoint: "/kubeconform"
-          args: "-summary -output json -verbose -ignore-filename-pattern .github/ ./"
+          args: "-summary -output json -verbose ./manifests"
