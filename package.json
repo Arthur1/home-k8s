@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "buildAll": "(cd actions/dispatch-bump-image-version; npm run build)"
   },
   "author": "ASAKURA Kazuki",
   "license": "UNLICENSED",

@@ -1,0 +1,19 @@
+on:
+  workflow_call:
+
+jobs:
+  push-dist-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run buildAll
+      - run: |
+          DIFF=$(git status --porcelain)
+          if [ -n "$DIFF" ]; then
+            echo "$DIFF"
+            exit 1
+          fi

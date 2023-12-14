@@ -6,3 +6,6 @@ on:
 jobs:
   test-k8s:
     uses: ./.github/workflows/wf-test-k8s.yml
+
+  test-node:
+    uses: ./.github/workflows/wf-test-node.yml
