@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: mackerel-sesame-deploy-annotation-
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+        - name: mkr-create-annotation
+          image: docker.io/mackerel/mkr:latest
+          env:
+            - name: MACKEREL_APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: mackerel-arthur-1
+                  key: apikey
+          command:
+            - "annotations"
+            - "create"
+            - "--title"
+            - "\"synced mackerel-sesame\""
+            - "--service"
+            - "iot-monitor"
+            - "--role"
+            - "mackerel-sesame"
+            - "--from"
+            - "\"$(date +%s)\""
+            - "--to"
+            - "\"$(date +%s)\""
+      restartPolicy: Never
