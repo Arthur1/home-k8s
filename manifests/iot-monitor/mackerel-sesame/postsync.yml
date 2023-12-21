@@ -17,17 +17,10 @@ spec:
                 secretKeyRef:
                   name: mackerel-arthur-1
                   key: apikey
-          command:
-            - "annotations"
-            - "create"
-            - "--title"
-            - "\"synced mackerel-sesame\""
-            - "--service"
-            - "iot-monitor"
-            - "--role"
-            - "mackerel-sesame"
-            - "--from"
-            - "\"$(date +%s)\""
-            - "--to"
-            - "\"$(date +%s)\""
+          command: ["sh", "-c"]
+          args:
+            - |
+              mkr annotations create --title "synced mackerel-sesame" \
+              -s iot-monitor -r mackerel-sesame \
+              --from $(date +%s) --to $(date +%s)
       restartPolicy: Never
