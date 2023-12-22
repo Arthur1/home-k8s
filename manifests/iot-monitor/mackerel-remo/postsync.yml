@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: mackerel-remo-deploy-annotation-
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+        - name: mkr-create-annotation
+          image: docker.io/mackerel/mkr:latest
+          env:
+            - name: MACKEREL_APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: mackerel-arthur-1
+                  key: apikey
+          command: ["sh", "-c"]
+          args:
+            - |
+              mkr annotations create --title "synced mackerel-remo" \
+              -s iot-monitor -r mackerel-remo \
+              --from $(date +%s) --to $(date +%s)
+      restartPolicy: Never
