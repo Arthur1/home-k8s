@@ -11,7 +11,7 @@ spec:
         spec:
           containers:
             - name: mackerel-remo
-              image: ghcr.io/arthur1/mackerel-remo:sha-04ea23f
+              image: ghcr.io/arthur1/mackerel-remo:sha-2b3c38e
               env:
                 - name: MACKEREL_API_KEY
                   valueFrom:
