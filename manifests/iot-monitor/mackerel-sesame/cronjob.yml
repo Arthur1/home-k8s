@@ -32,4 +32,4 @@ spec:
                       key: device-uuid
                 - name: SESAME_DEVICE_NAME_FOR_METRIC
                   value: sesame5
-          restartPolicy: OnFailure
+          restartPolicy: Never
