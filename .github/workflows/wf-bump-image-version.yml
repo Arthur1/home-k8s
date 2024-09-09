@@ -32,7 +32,7 @@ jobs:
         with:
           app-id: 364898
           private-key: ${{ secrets.ARTHUR1_BOT_PRIVATE_KEY }}
-      - uses: peter-evans/create-pull-request@v6
+      - uses: peter-evans/create-pull-request@v7
         with:
           commit-message: Bump to ${{ inputs.image-name }}:${{ inputs.new-image-tag }}
           title: Bump to ${{ inputs.image-name }}:${{ inputs.new-image-tag }}
